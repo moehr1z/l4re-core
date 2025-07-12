@@ -129,3 +129,21 @@ fiasco_tbuf_entries(void)
 
   return mr->mr[0];
 }
+
+L4_INLINE l4_umword_t
+fiasco_tbuf_last_committed()
+{
+  enum { TBUF_LAST_COMMITTED = L4_KDEBUG_GROUP_TRACE + 0x23 };
+  l4_utcb_t *u = l4_utcb();
+  l4_msg_regs_t *mr = l4_utcb_mr_u(u);
+
+  mr->mr[0] = TBUF_LAST_COMMITTED;
+  if (l4_error(l4_ipc_call(L4_BASE_DEBUGGER_CAP, u,
+                           l4_msgtag(L4_PROTO_DEBUGGER, 1, 0, 0),
+                           L4_IPC_NEVER)) < 0)
+  {
+    return 0;
+  }
+
+  return mr->mr[0];
+}

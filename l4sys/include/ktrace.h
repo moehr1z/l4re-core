@@ -107,6 +107,13 @@ fiasco_tbuf_map(l4_addr_t offset, l4_fpage_t fpage);
 L4_INLINE l4_umword_t
 fiasco_tbuf_entries(void);
 
+/**
+ * Return offset of last event in trace-buffer.
+ * \ingroup fiasco_trace_api
+ */
+L4_INLINE l4_umword_t
+fiasco_tbuf_last_committed(void);
+
 #include <l4/sys/__ktrace-impl.h>
 
 #endif
