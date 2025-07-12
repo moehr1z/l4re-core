@@ -38,7 +38,7 @@
  * \param  text   Logging text
  * \return Pointer to trace-buffer entry
  */
-L4_INLINE l4_umword_t
+L4_INLINE long
 fiasco_tbuf_log(const char *text);
 
 /**
@@ -52,7 +52,7 @@ fiasco_tbuf_log(const char *text);
  * \param  v3     third value
  * \return Pointer to trace-buffer entry
  */
-L4_INLINE l4_umword_t
+L4_INLINE long
 fiasco_tbuf_log_3val(const char *text, l4_umword_t v1, l4_umword_t v2, l4_umword_t v3);
 
 /**
@@ -62,7 +62,7 @@ fiasco_tbuf_log_3val(const char *text, l4_umword_t v1, l4_umword_t v2, l4_umword
  * \param  data       binary data
  * \return Pointer to trace-buffer entry
  */
-L4_INLINE l4_umword_t
+L4_INLINE long
 fiasco_tbuf_log_binary(const unsigned char *data);
 
 /**
@@ -78,6 +78,34 @@ fiasco_tbuf_clear(void);
  */
 L4_INLINE void
 fiasco_tbuf_dump(void);
+
+/**
+ * Log current known kernel objects to tracebuffer.
+ * \ingroup fiasco_trace_api
+ */
+L4_INLINE void
+fiasco_tbuf_log_object_names(void);
+
+/**
+ * Return size of kernel trace-buffer.
+ * \ingroup fiasco_trace_api
+ */
+L4_INLINE l4_umword_t
+fiasco_tbuf_size(void);
+
+/**
+ * Map trace-buffer to current address space.
+ * \ingroup fiasco_trace_api
+ */
+L4_INLINE long
+fiasco_tbuf_map(l4_addr_t offset, l4_fpage_t fpage);
+
+/**
+ * Return number of entries in kernel trace-buffer.
+ * \ingroup fiasco_trace_api
+ */
+L4_INLINE l4_umword_t
+fiasco_tbuf_entries(void);
 
 #include <l4/sys/__ktrace-impl.h>
 
